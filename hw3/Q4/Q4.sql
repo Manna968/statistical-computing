@@ -4,7 +4,7 @@ prl numeric,
 position text
 );
 
-insert into new_table (player, prl) (select id, per - round(67*va/(gp*minutes), 1) from more_player_stats);
+insert into new_table (player, prl) (select id, round((per-67*va/(gp*minutes)),1) from more_player_stats);
 
 update new_table
 set position = 'PF'
@@ -23,4 +23,3 @@ set position = 'SG/SF'
 where prl >= 0 AND prl < 10.6;
 
 select * from new_table limit 10;
-
