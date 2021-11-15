@@ -1,7 +1,9 @@
 class Node(object):
-    def __init__(self, data):
-        self.data = data
+    def __init__(self):
         self.next = None
+    
+    def set_data(self, data):
+        self.data = data
 
 
 # Class to create a Linked List
@@ -35,7 +37,8 @@ class LinkedList(object):
 
     # Insert a node in a linked list
     def insert(self, data):
-        node = Node(data)
+        node = Node()
+        node.set_data(data)
         current = self.head
         if not current:
             self.head = node
@@ -67,28 +70,20 @@ class LinkedList(object):
         return
     
     def sort(self):
-        
         current = self.head
-        a = [current.data]
-        while (current.next):
-            current = current.next
-            a.append(current.data)
-
-        for i in range(len(a)-1):
-            exchange = False
-            for j in range(len(a)-i-1):
-                if a[j] > a[j+1]:
-                    a[j], a[j+1] = a[j+1], a[j]
-                    exchange = True
-                if not exchange:
-                    break
-        k = 0
-        temp = self.head
-        while k < (len(a)):
-            temp.data = a[k]
-            temp = temp.next
-            k = k + 1
-        return self
+        while current:
+            tmp = current
+            ite = tmp.next
+            while ite:
+                if ite.data < tmp.data:
+                    tmp = ite
+                ite = ite.next   
+            a = current.data
+            current.data = tmp.data
+            tmp.data = a
+            current = current.next             
+        return self     
+          
     
     def remove_dups(self):
         current = self.head
@@ -104,7 +99,8 @@ class LinkedList(object):
     
 
 
-first_node = Node(11)
+first_node = Node()
+first_node.set_data(11)
 linked_list = LinkedList(first_node)
 linked_list.insert(3)
 linked_list.insert(6)

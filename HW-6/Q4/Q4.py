@@ -5,9 +5,8 @@ def delete_keys(list, dictionary):
     if (len(list) == 0):
         return dictionary
     for key in list:
-        for i in dictionary.keys():
-            if (key == i):
-                tem.pop(key)
+        if key in dictionary.keys():
+            tem.pop(key)
 
     return tem
 

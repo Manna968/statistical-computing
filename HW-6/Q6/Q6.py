@@ -1,7 +1,9 @@
 class Node(object):
-    def __init__(self, data):
-        self.data = data
+    def __init__(self):
         self.previous = None
+    
+    def set_data(self, data):
+        self.data = data
 
 
 # Class to create a Linked List
@@ -35,7 +37,8 @@ class ReverseLinkedList(object):
 
     # Insert a node in a linked list
     def insert(self, data):
-        node = Node(data)
+        node = Node()
+        node.set_data(data)
         node.previous = self.tail
         self.tail = node
        
@@ -49,7 +52,7 @@ class ReverseLinkedList(object):
 
         # Check if head node is to be deleted
         if self.tail.data == data:
-            tail = temp.previous
+            self.tail = temp.previous
             print("Deleted node is " + str(self.tail.data))
             return
 
@@ -66,10 +69,10 @@ class ReverseLinkedList(object):
         current = self.tail
         while current.previous:
             if current.data == value:
-                current = current.previous
                 return True
             else:
-                return False
+                current = current.previous
+        return False
 
 
 
@@ -80,7 +83,8 @@ class ReverseLinkedList(object):
     
 
 
-first_node = Node(11)
+first_node = Node()
+first_node.set_data(11)
 linked_list = ReverseLinkedList(first_node)
 linked_list.insert(3)
 linked_list.insert(6)
